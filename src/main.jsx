@@ -13,31 +13,126 @@ import {
   MagnifyingGlass,
   ShieldCheck,
   X,
-  ListChecks
+  ListChecks,
+  CaretRight
 } from "@phosphor-icons/react";
 import "./styles.css";
 
-const steps = [
-  ["01","Подготовка к продаже","Не начинайте продажу, пока не знаете, что делать на старте.","Разберётесь, какие решения принять заранее и как подготовить план продажи."],
-  ["02","Стратегия продажи","Продать дороже или продать быстрее?","Выберете стратегию и поймёте, какие действия соответствуют вашей цели."],
-  ["03","Реальная цена квартиры","Узнайте, сколько за вашу квартиру действительно готовы платить.","Научитесь находить аналоги и определять обоснованную стартовую цену."],
-  ["04","Подготовка квартиры","Не тратьте деньги на то, что не вернётся при продаже.","Поймёте, что действительно влияет на привлекательность объекта."],
-  ["05","Фотографии","Сначала покупатель выбирает фотографию — и только потом квартиру.","Научитесь показывать квартиру так, чтобы объявление хотелось открыть."],
-  ["06","Объявление","Сделайте объявление, после которого хочется посмотреть квартиру.","Соберёте заголовок, описание и структуру объявления."],
-  ["07","Размещение","Опубликовали — но никто не звонит? Найдите причину.","Научитесь понимать, проблема в цене, подаче или стратегии."],
-  ["08","Первые обращения","Не теряйте покупателя в первые минуты разговора.","Получите алгоритм общения и перевода обращения в следующий шаг."],
-  ["09","Квалификация покупателя","Отделяйте реального покупателя от праздного интереса.","Научитесь быстро выяснять бюджет, сроки и готовность к покупке."],
-  ["10","Подготовка к показу","Покажите квартиру так, чтобы покупатель начал представлять её своей.","Получите понятный алгоритм подготовки квартиры и встречи."],
-  ["11","Проведение показа","Не просто откройте дверь — покажите ценность квартиры.","Поймёте, что говорить, что показывать и как завершать встречу."],
-  ["12","Возражения","«Дорого». «Подумаем». «Нашли дешевле». Что отвечать?","Получите систему работы с типичными возражениями."],
-  ["13","Торг","Как не отдать покупателю лишние деньги просто потому, что он попросил скидку.","Научитесь вести переговоры и принимать решение о скидке осознанно."],
-  ["14","Выбор покупателя","Самая высокая цена — не всегда самый простой путь к деньгам.","Научитесь учитывать цену, сроки, способ расчёта и условия."],
-  ["15","Договорённости","Договорились о цене? Теперь не дайте сделке развалиться.","Поймёте, что необходимо согласовать до перехода к сделке."],
-  ["16","Документы","Найдите проблемы с документами до того, как их найдёт покупатель.","Разберётесь, что подготовить заранее и что проверить."],
-  ["17","Подготовка сделки","Покупатель найден. Что делать дальше?","Получите последовательность действий до подписания документов."],
-  ["18","Расчёты и передача","Последний этап — и здесь особенно важно не расслабиться.","Поймёте последовательность расчётов, передачи квартиры и ключей."],
-  ["19","Регистрация","Что происходит после того, как вы поставили подпись?","Будете понимать, что происходит после подписания и что контролировать."],
-  ["20","Завершение продажи","Квартира продана. Но работа ещё не закончена.","Получите финальный чек-лист закрытия сделки."]
+const modules = [
+  {
+    num: "01",
+    title: "ПОДГОТОВЬТЕ",
+    subtitle: "Квартира и документы",
+    description:
+      "Подготовьте квартиру к продаже и уберите проблемы ещё до появления первого покупателя.",
+    lessons: [
+      [
+        "01.1",
+        "Квартира и документы",
+        "Что проверить и подготовить до выхода на рынок."
+      ],
+      [
+        "01.2",
+        "Подготовка квартиры",
+        "Что действительно влияет на первое впечатление и цену."
+      ]
+    ]
+  },
+  {
+    num: "02",
+    title: "ОЦЕНИТЕ",
+    subtitle: "Цена и стратегия",
+    description:
+      "Определите реальную цену и стратегию, с которой квартира выйдет на рынок.",
+    lessons: [
+      [
+        "02.1",
+        "Анализ рынка",
+        "Как находить сопоставимые квартиры и читать рынок."
+      ],
+      [
+        "02.2",
+        "Цена и стратегия",
+        "Как определить стартовую цену и допустимый торг."
+      ]
+    ]
+  },
+  {
+    num: "03",
+    title: "УПАКУЙТЕ",
+    subtitle: "Фото, видео и объявление",
+    description:
+      "Сделайте подачу квартиры такой, чтобы покупателю захотелось открыть объявление и приехать на просмотр.",
+    lessons: [
+      [
+        "03.1",
+        "Фото и видео",
+        "Как показать квартиру самостоятельно и не потерять ценность."
+      ],
+      [
+        "03.2",
+        "Продающее объявление",
+        "Как собрать заголовок, описание и структуру объявления."
+      ]
+    ]
+  },
+  {
+    num: "04",
+    title: "ПРОДВИНЬТЕ",
+    subtitle: "Площадки и покупатели",
+    description:
+      "Дайте объявлению охват и научитесь превращать просмотры в реальные обращения.",
+    lessons: [
+      [
+        "04.1",
+        "Площадки и размещение",
+        "Где размещать объект и как контролировать результат."
+      ],
+      [
+        "04.2",
+        "Обращения и покупатели",
+        "Как отвечать, квалифицировать и не терять интерес."
+      ]
+    ]
+  },
+  {
+    num: "05",
+    title: "ПРОДАВАЙТЕ",
+    subtitle: "Показы и переговоры",
+    description:
+      "Проведите покупателя от первого просмотра до конкретного предложения.",
+    lessons: [
+      [
+        "05.1",
+        "Показы",
+        "Как подготовить встречу и показать ценность квартиры."
+      ],
+      [
+        "05.2",
+        "Переговоры и торг",
+        "Как работать с возражениями, условиями и ценой."
+      ]
+    ]
+  },
+  {
+    num: "06",
+    title: "ЗАКРОЙТЕ",
+    subtitle: "Сделка, деньги и передача",
+    description:
+      "Согласуйте условия, подготовьте сделку и спокойно доведите продажу до передачи квартиры.",
+    lessons: [
+      [
+        "06.1",
+        "Документы и сделка",
+        "Что проверить и согласовать перед подписанием."
+      ],
+      [
+        "06.2",
+        "Расчёты и передача",
+        "Как пройти расчёты, регистрацию и передачу квартиры."
+      ]
+    ]
+  }
 ];
 
 function Reveal({ children, className = "", id }) {
@@ -71,11 +166,10 @@ function Reveal({ children, className = "", id }) {
 
 function App() {
   const [menu, setMenu] = useState(false);
-  const [openStep, setOpenStep] = useState(null);
+  const [openModule, setOpenModule] = useState(null);
 
   return (
     <div className="site">
-
       <header className="nav">
         <a className="brand" href="#top">
           <span>ПРОДАЙ САМ</span>
@@ -117,6 +211,7 @@ function App() {
           <a href="#faq" onClick={() => setMenu(false)}>
             FAQ
           </a>
+
           <a
             className="primary"
             href="#buy"
@@ -129,15 +224,12 @@ function App() {
       )}
 
       <main id="top">
-
         {/* HERO */}
 
         <section className="hero">
-
           <div className="hero-copy">
-
             <div className="eyebrow">
-              СИСТЕМА ПРОДАЖИ КВАРТИРЫ · 20 ШАГОВ
+              СИСТЕМА ПРОДАЖИ КВАРТИРЫ · 6 МОДУЛЕЙ
             </div>
 
             <h1>
@@ -163,56 +255,52 @@ function App() {
             </p>
 
             <div className="hero-actions">
-              <a
-                className="primary hero-button"
-                href="#buy"
-              >
+              <a className="primary hero-button" href="#buy">
                 Посмотреть систему
                 <ArrowRight size={19} />
               </a>
 
-              <a
-                className="hero-secondary"
-                href="#program"
-              >
-                20 этапов продажи
+              <a className="hero-secondary" href="#program">
+                6 модулей · 12 уроков
               </a>
             </div>
 
             <div className="hero-proof">
-
               <span>
-                <strong>20</strong>
-                этапов
+                <strong>6</strong>
+                модулей
               </span>
 
               <span>
-                <strong>100+</strong>
-                материалов
+                <strong>12</strong>
+                уроков
               </span>
 
               <span>
                 <strong>1</strong>
                 понятный маршрут
               </span>
-
             </div>
-
           </div>
 
           <div className="hero-visual">
-
             <div className="sale-map">
-
               <div className="sale-map-head">
                 <span>МАРШРУТ ПРОДАЖИ</span>
-                <b>01 → 20</b>
+                <b>01 → 06</b>
               </div>
 
               <div className="sale-path">
-
                 <div className="path-step active">
                   <b>01</b>
+                  <strong>Подготовка</strong>
+                  <small>Что сделать</small>
+                </div>
+
+                <div className="path-line" />
+
+                <div className="path-step">
+                  <b>02</b>
                   <strong>Цена</strong>
                   <small>Сколько просить</small>
                 </div>
@@ -220,63 +308,55 @@ function App() {
                 <div className="path-line" />
 
                 <div className="path-step">
-                  <b>06</b>
-                  <strong>Объявление</strong>
-                  <small>Как привлечь</small>
+                  <b>03</b>
+                  <strong>Подача</strong>
+                  <small>Как показать</small>
                 </div>
 
                 <div className="path-line" />
 
                 <div className="path-step">
-                  <b>09</b>
-                  <strong>Покупатель</strong>
-                  <small>Как отобрать</small>
+                  <b>04</b>
+                  <strong>Покупатели</strong>
+                  <small>Где найти</small>
                 </div>
 
                 <div className="path-line" />
 
                 <div className="path-step">
-                  <b>13</b>
+                  <b>05</b>
                   <strong>Переговоры</strong>
-                  <small>Как не уступить лишнее</small>
+                  <small>Как договориться</small>
                 </div>
 
                 <div className="path-line" />
 
                 <div className="path-step final">
-                  <b>20</b>
+                  <b>06</b>
                   <strong>Сделка</strong>
                   <small>Деньги и ключи</small>
                 </div>
-
               </div>
 
               <div className="sale-map-foot">
                 <span>ПОДГОТОВКА</span>
-                <span>ПОИСК</span>
-                <span>ПЕРЕГОВОРЫ</span>
+                <span>ЦЕНА</span>
+                <span>ПОКУПАТЕЛИ</span>
                 <span>СДЕЛКА</span>
               </div>
-
             </div>
-
           </div>
-
         </section>
-
 
         {/* INTRO */}
 
         <Reveal className="intro section">
-
           <div className="section-kicker">
             ПОЧЕМУ ЭТО ВАЖНО
           </div>
 
           <div className="intro-grid">
-
             <div>
-
               <h2>
                 Продать квартиру —
                 <br />
@@ -291,18 +371,13 @@ function App() {
                 времени, покупателя или денег.
               </p>
 
-              <a
-                className="text-link"
-                href="#program"
-              >
-                Посмотреть все 20 этапов
+              <a className="text-link" href="#program">
+                Посмотреть систему
                 <ArrowRight size={17} />
               </a>
-
             </div>
 
             <div className="icon-grid">
-
               {[
                 [Tag, "Цена"],
                 [House, "Подготовка"],
@@ -313,21 +388,14 @@ function App() {
                 [Handshake, "Переговоры"],
                 [ShieldCheck, "Сделка"]
               ].map(([Icon, label]) => (
-                <div
-                  className="icon-item"
-                  key={label}
-                >
+                <div className="icon-item" key={label}>
                   <Icon size={22} />
                   <span>{label}</span>
                 </div>
               ))}
-
             </div>
-
           </div>
-
         </Reveal>
-
 
         {/* PROGRAM */}
 
@@ -335,137 +403,109 @@ function App() {
           id="program"
           className="program section dark-section"
         >
-
           <div className="program-head">
-
             <div>
-
               <div className="section-kicker light">
                 ПРОГРАММА
               </div>
 
               <h2>
-                20 шагов —
+                6 модулей —
                 <br />
                 <span>от решения до сделки.</span>
               </h2>
-
             </div>
 
             <p>
-              Каждый этап заканчивается конкретным результатом,
-              который приближает вас к продаже.
+              Не длинный список из 20 пунктов, а шесть понятных
+              этапов. Внутри каждого — два практических урока.
             </p>
-
           </div>
 
+          <div className="modules-grid">
+            {modules.map((module, index) => {
+              const isOpen = openModule === index;
 
-          <div className="featured-step">
-
-            <div className="featured-number">
-              03
-            </div>
-
-            <div>
-
-              <div className="small-label">
-                КЛЮЧЕВОЙ ЭТАП
-              </div>
-
-              <h3>
-                Сколько за вашу квартиру действительно готовы заплатить?
-              </h3>
-
-              <p>
-                Научитесь анализировать рынок, находить сопоставимые
-                объекты и определять стартовую цену без слепой
-                ориентации на объявления.
-              </p>
-
-            </div>
-
-            <div className="featured-visual">
-
-              <div className="price-line">
-                <span>Квартира</span>
-                <b>7 420 000 ₽</b>
-              </div>
-
-              <div className="price-line">
-                <span>Аналог 01</span>
-                <b>7 350 000 ₽</b>
-              </div>
-
-              <div className="price-line">
-                <span>Аналог 02</span>
-                <b>7 510 000 ₽</b>
-              </div>
-
-              <div className="price-line accent">
-                <span>Старт</span>
-                <b>7 490 000 ₽</b>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div className="steps-grid">
-
-            {steps.map(
-              ([num, title, hook, result], i) => (
-                <button
-                  className={`step-row ${
-                    openStep === i ? "open" : ""
+              return (
+                <div
+                  className={`module-card ${
+                    isOpen ? "is-open" : ""
                   }`}
-                  key={num}
-                  onClick={() =>
-                    setOpenStep(
-                      openStep === i ? null : i
-                    )
-                  }
+                  key={module.num}
                 >
+                  <button
+                    className="module-trigger"
+                    onClick={() =>
+                      setOpenModule(isOpen ? null : index)
+                    }
+                    aria-expanded={isOpen}
+                  >
+                    <span className="module-index">
+                      {module.num}
+                    </span>
 
-                  <span className="step-num">
-                    {num}
-                  </span>
+                    <span className="module-title-wrap">
+                      <strong>{module.title}</strong>
+                      <small>{module.subtitle}</small>
+                    </span>
 
-                  <span className="step-main">
+                    <span className="module-count">
+                      2 УРОКА
+                    </span>
 
-                    <strong>{title}</strong>
+                    <CaretRight
+                      className="module-arrow"
+                      size={20}
+                    />
+                  </button>
 
-                    <small>{hook}</small>
+                  <div className="module-content">
+                    <div>
+                      <p className="module-description">
+                        {module.description}
+                      </p>
 
-                    {openStep === i && (
-                      <em>{result}</em>
-                    )}
+                      <div className="lesson-list">
+                        {module.lessons.map(
+                          ([lessonNum, title, description]) => (
+                            <div
+                              className="lesson-row"
+                              key={lessonNum}
+                            >
+                              <span>{lessonNum}</span>
 
-                  </span>
+                              <span>
+                                <strong>{title}</strong>
+                                <small>{description}</small>
+                              </span>
 
-                  <ArrowRight
-                    className="step-arrow"
-                    size={19}
-                  />
-
-                </button>
-              )
-            )}
-
+                              <ArrowRight size={16} />
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
+          <div className="program-footer-note">
+            <span>6 МОДУЛЕЙ</span>
+            <i>•</i>
+            <span>12 УРОКОВ</span>
+            <i>•</i>
+            <span>ЧЕК-ЛИСТЫ</span>
+            <i>•</i>
+            <span>ПРАКТИЧЕСКИЕ ЗАДАНИЯ</span>
+          </div>
         </section>
-
 
         {/* INSIDE */}
 
-        <Reveal
-          id="inside"
-          className="inside section"
-        >
-
+        <Reveal id="inside" className="inside section">
           <div className="inside-copy">
-
             <div className="section-kicker">
               КАК ЭТО ВЫГЛЯДИТ
             </div>
@@ -484,7 +524,6 @@ function App() {
             </p>
 
             <ul>
-
               {[
                 "Короткое видео с объяснением",
                 "Пошаговая инструкция",
@@ -497,72 +536,47 @@ function App() {
                   {x}
                 </li>
               ))}
-
             </ul>
 
-            <a
-              className="text-link"
-              href="#buy"
-            >
+            <a className="text-link" href="#buy">
               Получить доступ
               <ArrowRight size={17} />
             </a>
-
           </div>
 
-
           <div className="course-preview">
-
             <div className="browser-bar">
               <span />
               <span />
               <span />
-              <b>Продай сам / Этап 03</b>
+              <b>Продай сам / Модуль 02</b>
             </div>
 
             <div className="course-ui">
-
               <aside>
-
-                {steps.slice(0, 7).map(
-                  ([n, t]) => (
-                    <div
-                      className={
-                        n === "03"
-                          ? "active"
-                          : ""
-                      }
-                      key={n}
-                    >
-                      <b>{n}</b>
-                      {t}
-                    </div>
-                  )
-                )}
-
+                {modules.map((module) => (
+                  <div
+                    className={
+                      module.num === "02" ? "active" : ""
+                    }
+                    key={module.num}
+                  >
+                    <b>{module.num}</b>
+                    {module.subtitle}
+                  </div>
+                ))}
               </aside>
 
               <div className="lesson">
-
                 <div className="lesson-media">
-
                   <Play size={36} />
-
-                  <span>
-                    12:34
-                  </span>
-
+                  <span>12:34</span>
                 </div>
 
-                <h4>
-                  Определяем реальную цену
-                </h4>
+                <h4>Определяем реальную цену</h4>
 
                 <div className="check-panel">
-
-                  <b>
-                    Что нужно сделать
-                  </b>
+                  <b>Что нужно сделать</b>
 
                   {[
                     "Найти аналоги",
@@ -575,25 +589,15 @@ function App() {
                       {x}
                     </span>
                   ))}
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </Reveal>
-
 
         {/* AUTHOR */}
 
-        <Reveal
-          id="author"
-          className="author section"
-        >
-
+        <Reveal id="author" className="author section">
           <div className="author-image">
             <div className="portrait-placeholder">
               ДА
@@ -601,14 +605,11 @@ function App() {
           </div>
 
           <div className="author-copy">
-
             <div className="section-kicker">
               КАК ЭТО СОЗДАНО
             </div>
 
-            <h2>
-              Данил Аверин
-            </h2>
+            <h2>Данил Аверин</h2>
 
             <p className="author-role">
               Специалист по недвижимости
@@ -626,51 +627,35 @@ function App() {
               «Сложные вещи можно делать проще, если разложить
               их на правильные действия.»
             </div>
-
           </div>
-
         </Reveal>
-
 
         {/* BUY */}
 
-        <section
-          id="buy"
-          className="buy section"
-        >
-
+        <section id="buy" className="buy section">
           <div className="buy-main">
-
             <div className="section-kicker light">
               ПОЛНЫЙ ДОСТУП
             </div>
 
-            <h2>
-              Продай сам
-            </h2>
+            <h2>Продай сам</h2>
 
             <div className="price">
               2 990 ₽
             </div>
 
             <p>
-              Вся система из 20 этапов, материалы
+              6 модулей, 12 уроков, материалы
               и практические задания.
             </p>
 
-            <a
-              className="light-button"
-              href="#contact"
-            >
+            <a className="light-button" href="#contact">
               Получить доступ
               <ArrowRight size={19} />
             </a>
-
           </div>
 
-
           <div className="buy-side">
-
             <div className="section-kicker">
               ВТОРОЙ ВАРИАНТ
             </div>
@@ -690,21 +675,13 @@ function App() {
             >
               Обсудить продажу квартиры
             </a>
-
           </div>
-
         </section>
-
 
         {/* FAQ */}
 
-        <Reveal
-          id="faq"
-          className="faq section"
-        >
-
+        <Reveal id="faq" className="faq section">
           <div>
-
             <div className="section-kicker">
               FAQ
             </div>
@@ -716,20 +693,17 @@ function App() {
               <br />
               перед покупкой.
             </h2>
-
           </div>
 
-
           <div className="faq-list">
-
             {[
               [
                 "Подойдёт ли система, если я никогда не продавал квартиру?",
-                "Да. Этапы выстроены последовательно: от подготовки к продаже до завершения сделки."
+                "Да. Модули выстроены последовательно: от подготовки квартиры до завершения сделки."
               ],
               [
                 "Что я получаю после оплаты?",
-                "Доступ к 20 этапам, видео, инструкциям, чек-листам, материалам и практическим заданиям."
+                "Доступ к 6 модулям и 12 урокам, видео, инструкциям, чек-листам, материалам и практическим заданиям."
               ],
               [
                 "Можно ли обратиться к вам за помощью?",
@@ -741,33 +715,21 @@ function App() {
               ]
             ].map(([q, a]) => (
               <details key={q}>
-
                 <summary>
                   {q}
                   <span>+</span>
                 </summary>
 
-                <p>
-                  {a}
-                </p>
-
+                <p>{a}</p>
               </details>
             ))}
-
           </div>
-
         </Reveal>
-
 
         {/* CONTACT */}
 
-        <section
-          id="contact"
-          className="contact section"
-        >
-
+        <section id="contact" className="contact section">
           <div>
-
             <div className="section-kicker light">
               ФИНАЛЬНЫЙ ШАГ
             </div>
@@ -775,15 +737,11 @@ function App() {
             <h2>
               Начните с системы.
               <br />
-              <span>
-                Решение останется за вами.
-              </span>
+              <span>Решение останется за вами.</span>
             </h2>
-
           </div>
 
           <div className="contact-actions">
-
             <a
               className="light-button"
               href="tel:+79956441700"
@@ -798,33 +756,22 @@ function App() {
             >
               Обсудить продажу квартиры →
             </a>
-
           </div>
-
         </section>
-
       </main>
 
-
       <footer>
-
         <div className="brand">
           <span>ПРОДАЙ САМ</span>
-          <small>
-            СИСТЕМА ПРОДАЖИ КВАРТИРЫ
-          </small>
+          <small>СИСТЕМА ПРОДАЖИ КВАРТИРЫ</small>
         </div>
 
-        <span>
-          © 2026 Данил Аверин
-        </span>
-
+        <span>© 2026 Данил Аверин</span>
       </footer>
-
     </div>
   );
 }
 
-createRoot(
-  document.getElementById("root")
-).render(<App />);
+createRoot(document.getElementById("root")).render(
+  <App />
+);

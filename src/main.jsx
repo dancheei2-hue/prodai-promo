@@ -1,103 +1,932 @@
-<Reveal id="services" className="services section">
-  <div className="services-head">
-    <div>
-      <div className="section-kicker">ПОМОЩЬ НА ЛЮБОМ ЭТАПЕ</div>
-      <h2>
-        Не хотите делать<br />
-        <span>всё самостоятельно?</span>
-      </h2>
+import React, { useEffect, useRef, useState } from "react";
+import { createRoot } from "react-dom/client";
+import {
+  ArrowRight,
+  Check,
+  Play,
+  House,
+  Camera,
+  FileText,
+  Phone,
+  Handshake,
+  Tag,
+  MagnifyingGlass,
+  ShieldCheck,
+  X,
+  ListChecks,
+  CaretRight
+} from "@phosphor-icons/react";
+import "./styles.css";
+
+const moduleImages = {
+  "01": "/prodai-promo/photos/module-01.jpg",
+  "02": "/prodai-promo/photos/module-02.jpg",
+  "03": "/prodai-promo/photos/module-03.jpg",
+  "04": "/prodai-promo/photos/module-04.jpg",
+  "05": "/prodai-promo/photos/module-05.jpg",
+  "06": "/prodai-promo/photos/module-06.jpg"
+};
+
+const siteImages = {
+  hero: "/prodai-promo/photos/hero.jpg",
+  intro: "/prodai-promo/photos/intro.jpg",
+  lesson: "/prodai-promo/photos/lesson.jpg",
+  deal: "/prodai-promo/photos/deal.jpg"
+};
+
+const modules = [
+  {
+    num: "01",
+    title: "ПОДГОТОВЬТЕ",
+    subtitle: "Квартира и документы",
+    description:
+      "Подготовьте квартиру к продаже и уберите проблемы ещё до появления первого покупателя.",
+    lessons: [
+      [
+        "01.1",
+        "Квартира и документы",
+        "Что проверить и подготовить до выхода на рынок."
+      ],
+      [
+        "01.2",
+        "Подготовка квартиры",
+        "Что действительно влияет на первое впечатление и цену."
+      ]
+    ]
+  },
+  {
+    num: "02",
+    title: "ОЦЕНИТЕ",
+    subtitle: "Цена и стратегия",
+    description:
+      "Определите реальную цену и стратегию, с которой квартира выйдет на рынок.",
+    lessons: [
+      [
+        "02.1",
+        "Анализ рынка",
+        "Как находить сопоставимые квартиры и читать рынок."
+      ],
+      [
+        "02.2",
+        "Цена и стратегия",
+        "Как определить стартовую цену и допустимый торг."
+      ]
+    ]
+  },
+  {
+    num: "03",
+    title: "УПАКУЙТЕ",
+    subtitle: "Фото, видео и объявление",
+    description:
+      "Сделайте подачу квартиры такой, чтобы покупателю захотелось открыть объявление и приехать на просмотр.",
+    lessons: [
+      [
+        "03.1",
+        "Фото и видео",
+        "Как показать квартиру самостоятельно и не потерять ценность."
+      ],
+      [
+        "03.2",
+        "Продающее объявление",
+        "Как собрать заголовок, описание и структуру объявления."
+      ]
+    ]
+  },
+  {
+    num: "04",
+    title: "ПРОДВИНЬТЕ",
+    subtitle: "Площадки и покупатели",
+    description:
+      "Дайте объявлению охват и научитесь превращать просмотры в реальные обращения.",
+    lessons: [
+      [
+        "04.1",
+        "Площадки и размещение",
+        "Где размещать объект и как контролировать результат."
+      ],
+      [
+        "04.2",
+        "Обращения и покупатели",
+        "Как отвечать, квалифицировать и не терять интерес."
+      ]
+    ]
+  },
+  {
+    num: "05",
+    title: "ПРОДАВАЙТЕ",
+    subtitle: "Показы и переговоры",
+    description:
+      "Проведите покупателя от первого просмотра до конкретного предложения.",
+    lessons: [
+      [
+        "05.1",
+        "Показы",
+        "Как подготовить встречу и показать ценность квартиры."
+      ],
+      [
+        "05.2",
+        "Переговоры и торг",
+        "Как работать с возражениями, условиями и ценой."
+      ]
+    ]
+  },
+  {
+    num: "06",
+    title: "ЗАКРОЙТЕ",
+    subtitle: "Сделка, деньги и передача",
+    description:
+      "Согласуйте условия, подготовьте сделку и спокойно доведите продажу до передачи квартиры.",
+    lessons: [
+      [
+        "06.1",
+        "Документы и сделка",
+        "Что проверить и согласовать перед подписанием."
+      ],
+      [
+        "06.2",
+        "Расчёты и передача",
+        "Как пройти расчёты, регистрацию и передачу квартиры."
+      ]
+    ]
+  }
+];
+
+function Reveal({ children, className = "", id }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          element.classList.add("is-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} id={id} className={`reveal ${className}`}>
+      {children}
     </div>
+  );
+}
 
-    <p>
-      Можно взять только тот этап, на котором нужна помощь.
-      А если поймёте, что хотите делегировать продажу целиком —
-      обсудим сопровождение под ключ.
-    </p>
-  </div>
+function App() {
+  const [menu, setMenu] = useState(false);
+  const [openModule, setOpenModule] = useState(null);
 
-  <div className="services-grid">
+  return (
+    <div className="site">
+      <header className="nav">
+        <a className="brand" href="#top">
+          <span>ПРОДАЙ САМ</span>
+          <small>СИСТЕМА ПРОДАЖИ КВАРТИРЫ</small>
+        </a>
 
-    <article className="service-card">
-      <span className="service-number">01</span>
-      <h3>Понять цену</h3>
-      <div className="service-price">5 900 ₽</div>
+        <nav className="desktop-nav">
+          <a href="#program">Программа</a>
+          <a href="#inside">Как проходит</a>
+          <a href="#author">Об авторе</a>
+          <a href="#services">Помощь</a>
+          <a href="#faq">FAQ</a>
+        </nav>
 
-      <p>
-        Анализ рынка, сравнение с аналогами, диапазон цены
-        и стратегия торга.
-      </p>
+        <a className="nav-cta" href="#buy">
+          Получить доступ
+          <ArrowRight size={17} />
+        </a>
 
-      <a href="#contact" className="service-link">
-        Заказать <ArrowRight size={16} />
-      </a>
-    </article>
+        <button
+          className="mobile-menu"
+          onClick={() => setMenu(!menu)}
+          aria-label="Открыть меню"
+        >
+          {menu ? <X size={24} /> : <ListChecks size={24} />}
+        </button>
+      </header>
 
-    <article className="service-card">
-      <span className="service-number">02</span>
-      <h3>Подготовить к продаже</h3>
-      <div className="service-price">14 900 ₽</div>
+      {menu && (
+        <div className="mobile-panel">
+          <a href="#program" onClick={() => setMenu(false)}>
+            Программа
+          </a>
 
-      <p>
-        Подготовка квартиры, рекомендации по фото,
-        тексту объявления и стратегии размещения.
-      </p>
+          <a href="#inside" onClick={() => setMenu(false)}>
+            Как проходит
+          </a>
 
-      <a href="#contact" className="service-link">
-        Заказать <ArrowRight size={16} />
-      </a>
-    </article>
+          <a href="#author" onClick={() => setMenu(false)}>
+            Об авторе
+          </a>
 
-    <article className="service-card service-card-featured">
-      <span className="service-number">03</span>
+          <a href="#services" onClick={() => setMenu(false)}>
+            Помощь
+          </a>
 
-      <div className="service-badge">
-        САМОСТОЯТЕЛЬНО, НО С ПОДДЕРЖКОЙ
-      </div>
+          <a href="#faq" onClick={() => setMenu(false)}>
+            FAQ
+          </a>
 
-      <h3>Продать самому</h3>
-      <div className="service-price">29 900 ₽</div>
+          <a
+            className="primary"
+            href="#buy"
+            onClick={() => setMenu(false)}
+          >
+            Получить доступ
+            <ArrowRight />
+          </a>
+        </div>
+      )}
 
-      <p>
-        Система, консультации по ходу продажи,
-        продвижение, показы, переговоры и торг.
-      </p>
+      <main id="top">
+        <section className="hero">
+          <div className="hero-copy">
+            <div className="eyebrow">
+              СИСТЕМА ПРОДАЖИ КВАРТИРЫ · 6 МОДУЛЕЙ
+            </div>
 
-      <a href="#contact" className="service-link">
-        Обсудить формат <ArrowRight size={16} />
-      </a>
-    </article>
+            <h1>
+              Продай
+              <br />
+              квартиру <em>сам.</em>
+            </h1>
 
-    <article className="service-card service-card-dark">
-      <span className="service-number">04</span>
+            <div className="hero-values">
+              <span>СИСТЕМНО</span>
+              <i>·</i>
+              <span>ВЫГОДНО</span>
+              <i>·</i>
+              <span>БЕЗОПАСНО</span>
+            </div>
 
-      <div className="service-badge">
-        ПОЛНОЕ СОПРОВОЖДЕНИЕ
-      </div>
+            <p className="hero-lead">
+              Пошаговая система для собственника: от подготовки квартиры
+              и определения цены до переговоров, сделки и получения денег.
+            </p>
 
-      <h3>Продажа под ключ</h3>
-      <div className="service-price">105 000 ₽</div>
+            <div className="hero-actions">
+              <a className="primary hero-button" href="#buy">
+                Посмотреть систему
+                <ArrowRight size={19} />
+              </a>
 
-      <p>
-        Берём процесс на себя: от подготовки квартиры
-        и поиска покупателей до переговоров и сделки.
-      </p>
+              <a className="hero-secondary" href="#program">
+                6 модулей · 12 уроков
+              </a>
+            </div>
 
-      <a href="#contact" className="service-link">
-        Обсудить продажу <ArrowRight size={16} />
-      </a>
-    </article>
+            <div className="hero-proof">
+              <span>
+                <strong>6</strong>
+                модулей
+              </span>
 
-  </div>
+              <span>
+                <strong>12</strong>
+                уроков
+              </span>
 
-  <div className="services-note">
-    <strong>
-      Если после консультации решите доверить нам продажу
-      под ключ, стоимость консультации можно зачесть
-      в сопровождение.
-    </strong>
+              <span>
+                <strong>1</strong>
+                понятный маршрут
+              </span>
+            </div>
+          </div>
 
-    <span>
-      Условия и состав работ уточняются после оценки вашей ситуации.
-    </span>
-  </div>
-</Reveal>
+          <div className="hero-visual">
+            <div className="hero-photo">
+              <img
+                src={siteImages.hero}
+                alt="Современный интерьер квартиры"
+              />
+              <span>КВАРТИРА · ПЕРВЫЙ ВЗГЛЯД</span>
+            </div>
+
+            <div className="sale-map">
+              <div className="sale-map-head">
+                <span>МАРШРУТ ПРОДАЖИ</span>
+                <b>01 → 06</b>
+              </div>
+
+              <div className="sale-path">
+                {[
+                  ["01", "Подготовка", "Что сделать"],
+                  ["02", "Цена", "Сколько просить"],
+                  ["03", "Подача", "Как показать"],
+                  ["04", "Покупатели", "Где найти"],
+                  ["05", "Переговоры", "Как договориться"],
+                  ["06", "Сделка", "Деньги и ключи"]
+                ].map((step, index) => (
+                  <React.Fragment key={step[0]}>
+                    <div
+                      className={`path-step ${
+                        index === 0 ? "active" : ""
+                      } ${index === 5 ? "final" : ""}`}
+                    >
+                      <b>{step[0]}</b>
+                      <strong>{step[1]}</strong>
+                      <small>{step[2]}</small>
+                    </div>
+
+                    {index < 5 && <div className="path-line" />}
+                  </React.Fragment>
+                ))}
+              </div>
+
+              <div className="sale-map-foot">
+                <span>ПОДГОТОВКА</span>
+                <span>ЦЕНА</span>
+                <span>ПОКУПАТЕЛИ</span>
+                <span>СДЕЛКА</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Reveal className="intro section">
+          <div className="section-kicker">ПОЧЕМУ ЭТО ВАЖНО</div>
+
+          <div className="intro-grid">
+            <div>
+              <h2>
+                Продать квартиру —
+                <br />
+                <span>это не просто</span>
+                <br />
+                разместить объявление.
+              </h2>
+
+              <p>
+                Между решением «продаю» и получением денег есть десятки
+                решений. Один неверный шаг может стоить времени,
+                покупателя или денег.
+              </p>
+
+              <a className="text-link" href="#program">
+                Посмотреть систему
+                <ArrowRight size={17} />
+              </a>
+            </div>
+
+            <div className="intro-visual">
+              <div className="intro-photo">
+                <img
+                  src={siteImages.intro}
+                  alt="Современный интерьер квартиры"
+                />
+
+                <span>
+                  Подача квартиры начинается с первого впечатления.
+                </span>
+              </div>
+
+              <div className="icon-grid">
+                {[
+                  [Tag, "Цена"],
+                  [House, "Подготовка"],
+                  [Camera, "Фотографии"],
+                  [FileText, "Объявление"],
+                  [Phone, "Звонки"],
+                  [MagnifyingGlass, "Покупатели"],
+                  [Handshake, "Переговоры"],
+                  [ShieldCheck, "Сделка"]
+                ].map(([Icon, label]) => (
+                  <div className="icon-item" key={label}>
+                    <Icon size={22} />
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <section id="program" className="program section dark-section">
+          <div className="program-head">
+            <div>
+              <div className="section-kicker light">ПРОГРАММА</div>
+
+              <h2>
+                6 модулей —
+                <br />
+                <span>от решения до сделки.</span>
+              </h2>
+            </div>
+
+            <p>
+              Не длинный список из 20 пунктов, а шесть понятных этапов.
+              Внутри каждого — два практических урока.
+            </p>
+          </div>
+
+          <div className="modules-grid">
+            {modules.map((module, index) => {
+              const isOpen = openModule === index;
+
+              return (
+                <div
+                  className={`module-card ${
+                    isOpen ? "is-open" : ""
+                  }`}
+                  key={module.num}
+                >
+                  <div className="module-thumb">
+                    <img
+                      src={moduleImages[module.num]}
+                      alt={module.subtitle}
+                      loading="lazy"
+                    />
+
+                    <span>{module.num} / 06</span>
+                  </div>
+
+                  <button
+                    className="module-trigger"
+                    onClick={() =>
+                      setOpenModule(isOpen ? null : index)
+                    }
+                    aria-expanded={isOpen}
+                  >
+                    <span className="module-index">
+                      {module.num}
+                    </span>
+
+                    <span className="module-title-wrap">
+                      <strong>{module.title}</strong>
+                      <small>{module.subtitle}</small>
+                    </span>
+
+                    <span className="module-count">
+                      2 УРОКА
+                    </span>
+
+                    <CaretRight
+                      className="module-arrow"
+                      size={20}
+                    />
+                  </button>
+
+                  <div className="module-content">
+                    <div>
+                      <p className="module-description">
+                        {module.description}
+                      </p>
+
+                      <div className="lesson-list">
+                        {module.lessons.map(([number, title, description]) => (
+                          <div
+                            className="lesson-row"
+                            key={number}
+                          >
+                            <span>{number}</span>
+
+                            <span>
+                              <strong>{title}</strong>
+                              <small>{description}</small>
+                            </span>
+
+                            <ArrowRight size={16} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="program-footer-note">
+            <span>6 МОДУЛЕЙ</span>
+            <i>•</i>
+            <span>12 УРОКОВ</span>
+            <i>•</i>
+            <span>ЧЕК-ЛИСТЫ</span>
+            <i>•</i>
+            <span>ПРАКТИЧЕСКИЕ ЗАДАНИЯ</span>
+          </div>
+        </section>
+
+        <Reveal id="inside" className="inside section">
+          <div className="inside-copy">
+            <div className="section-kicker">
+              КАК ЭТО ВЫГЛЯДИТ
+            </div>
+
+            <h2>
+              Понятный формат.
+              <br />
+              <span>Реальные действия.</span>
+              <br />
+              Измеримый результат.
+            </h2>
+
+            <p>
+              Вы не просто смотрите уроки. После каждого этапа у вас
+              появляется конкретный результат по вашей квартире.
+            </p>
+
+            <ul>
+              {[
+                "Короткое видео с объяснением",
+                "Пошаговая инструкция",
+                "Чек-лист действий",
+                "Шаблоны и рабочие материалы",
+                "Практическое задание"
+              ].map((item) => (
+                <li key={item}>
+                  <Check size={18} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <a className="text-link" href="#buy">
+              Получить доступ
+              <ArrowRight size={17} />
+            </a>
+          </div>
+
+          <div className="course-preview">
+            <div className="browser-bar">
+              <span />
+              <span />
+              <span />
+              <b>Продай сам / Модуль 02</b>
+            </div>
+
+            <div className="course-ui">
+              <aside>
+                {modules.map((module) => (
+                  <div
+                    className={
+                      module.num === "02" ? "active" : ""
+                    }
+                    key={module.num}
+                  >
+                    <b>{module.num}</b>
+                    {module.subtitle}
+                  </div>
+                ))}
+              </aside>
+
+              <div className="lesson">
+                <div className="lesson-media">
+                  <img
+                    src={siteImages.lesson}
+                    alt="Урок о продаже квартиры"
+                  />
+
+                  <div className="lesson-play">
+                    <Play size={24} weight="fill" />
+                  </div>
+
+                  <span>12:34</span>
+                </div>
+
+                <h4>Определяем реальную цену</h4>
+
+                <div className="check-panel">
+                  <b>Что нужно сделать</b>
+
+                  {[
+                    "Найти аналоги",
+                    "Сравнить характеристики",
+                    "Определить диапазон",
+                    "Установить стартовую цену"
+                  ].map((item) => (
+                    <span key={item}>
+                      <Check size={14} />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal id="author" className="author section">
+          <div className="author-image">
+            <div className="author-photo-wrap">
+              <img
+                className="author-photo"
+                src="/prodai-promo/danil.webp"
+                alt="Данил Аверин"
+                onError={(event) => {
+                  event.currentTarget.style.display = "none";
+                }}
+              />
+
+              <div className="portrait-placeholder">ДА</div>
+            </div>
+          </div>
+
+          <div className="author-copy">
+            <div className="section-kicker">
+              КАК ЭТО СОЗДАНО
+            </div>
+
+            <h2>Данил Аверин</h2>
+
+            <p className="author-role">
+              Специалист по недвижимости
+            </p>
+
+            <p>
+              Я собрал в одной системе последовательность действий,
+              которую собственнику приходится проходить при продаже
+              квартиры. Задача «Продай сам» — не убедить вас в
+              необходимости риелтора, а дать понимание процесса
+              и возможность действовать осознанно.
+            </p>
+
+            <div className="author-note">
+              «Сложные вещи можно делать проще, если разложить их
+              на правильные действия.»
+            </div>
+          </div>
+        </Reveal>
+
+        <section id="buy" className="buy section">
+          <div className="buy-main">
+            <div className="buy-photo">
+              <img
+                src={siteImages.deal}
+                alt="Квартира и ключи"
+                loading="lazy"
+              />
+
+              <div>
+                <span>ПРОДАЖА КВАРТИРЫ</span>
+                <strong>
+                  От первого решения до передачи ключей.
+                </strong>
+              </div>
+            </div>
+
+            <div className="buy-main-copy">
+              <div className="section-kicker light">
+                ПОЛНЫЙ ДОСТУП
+              </div>
+
+              <h2>Продай сам</h2>
+
+              <div className="price">2 990 ₽</div>
+
+              <p>
+                6 модулей, 12 уроков, материалы и практические
+                задания.
+              </p>
+
+              <a className="light-button" href="#contact">
+                Получить доступ
+                <ArrowRight size={19} />
+              </a>
+            </div>
+          </div>
+
+          <div className="buy-side">
+            <div className="section-kicker">
+              НУЖНА ПОМОЩЬ?
+            </div>
+
+            <h3>
+              Не хотите заниматься продажей самостоятельно?
+            </h3>
+
+            <p>
+              Можно заказать отдельную помощь на нужном этапе
+              или полностью делегировать продажу.
+            </p>
+
+            <a className="outline-button" href="#services">
+              Посмотреть варианты помощи
+            </a>
+          </div>
+        </section>
+
+        <Reveal id="services" className="services section">
+          <div className="services-head">
+            <div>
+              <div className="section-kicker">
+                ПОМОЩЬ НА ЛЮБОМ ЭТАПЕ
+              </div>
+
+              <h2>
+                Не хотите делать
+                <br />
+                <span>всё самостоятельно?</span>
+              </h2>
+            </div>
+
+            <p>
+              Можно взять только тот этап, на котором нужна помощь.
+              А если поймёте, что хотите делегировать продажу
+              целиком — обсудим сопровождение под ключ.
+            </p>
+          </div>
+
+          <div className="services-grid">
+            <article className="service-card">
+              <span className="service-number">01</span>
+
+              <h3>Понять цену</h3>
+
+              <div className="service-price">
+                5 900 ₽
+              </div>
+
+              <p>
+                Анализ рынка, сравнение с аналогами, диапазон
+                цены и стратегия торга.
+              </p>
+
+              <a href="#contact" className="service-link">
+                Заказать
+                <ArrowRight size={16} />
+              </a>
+            </article>
+
+            <article className="service-card">
+              <span className="service-number">02</span>
+
+              <h3>Подготовить к продаже</h3>
+
+              <div className="service-price">
+                14 900 ₽
+              </div>
+
+              <p>
+                Подготовка квартиры, рекомендации по фото,
+                тексту объявления и стратегии размещения.
+              </p>
+
+              <a href="#contact" className="service-link">
+                Заказать
+                <ArrowRight size={16} />
+              </a>
+            </article>
+
+            <article className="service-card service-card-featured">
+              <span className="service-number">03</span>
+
+              <div className="service-badge">
+                САМОСТОЯТЕЛЬНО, НО С ПОДДЕРЖКОЙ
+              </div>
+
+              <h3>Продать самому</h3>
+
+              <div className="service-price">
+                29 900 ₽
+              </div>
+
+              <p>
+                Система, консультации по ходу продажи,
+                продвижение, показы, переговоры и торг.
+              </p>
+
+              <a href="#contact" className="service-link">
+                Обсудить формат
+                <ArrowRight size={16} />
+              </a>
+            </article>
+
+            <article className="service-card service-card-dark">
+              <span className="service-number">04</span>
+
+              <div className="service-badge">
+                ПОЛНОЕ СОПРОВОЖДЕНИЕ
+              </div>
+
+              <h3>Продажа под ключ</h3>
+
+              <div className="service-price">
+                105 000 ₽
+              </div>
+
+              <p>
+                Берём процесс на себя: от подготовки квартиры
+                и поиска покупателей до переговоров и сделки.
+              </p>
+
+              <a href="#contact" className="service-link">
+                Обсудить продажу
+                <ArrowRight size={16} />
+              </a>
+            </article>
+          </div>
+
+          <div className="services-note">
+            <strong>
+              Если после консультации решите доверить нам продажу
+              под ключ, стоимость консультации можно зачесть
+              в сопровождение.
+            </strong>
+
+            <span>
+              Условия и состав работ уточняются после оценки
+              вашей ситуации.
+            </span>
+          </div>
+        </Reveal>
+
+        <Reveal id="faq" className="faq section">
+          <div>
+            <div className="section-kicker">FAQ</div>
+
+            <h2>
+              Вопросы,
+              <br />
+              <span>которые возникают</span>
+              <br />
+              перед покупкой.
+            </h2>
+          </div>
+
+          <div className="faq-list">
+            {[
+              [
+                "Подойдёт ли система, если я никогда не продавал квартиру?",
+                "Да. Модули выстроены последовательно: от подготовки квартиры до завершения сделки."
+              ],
+              [
+                "Что я получаю после оплаты?",
+                "Доступ к 6 модулям и 12 урокам, видео, инструкциям, чек-листам, материалам и практическим заданиям."
+              ],
+              [
+                "Можно ли обратиться к вам за помощью?",
+                "Да. Можно выбрать отдельную услугу или обсудить сопровождение продажи квартиры."
+              ],
+              [
+                "Это юридическая консультация?",
+                "Нет. Система объясняет процесс и действия собственника. Конкретные юридические вопросы зависят от обстоятельств сделки и требуют отдельной проверки."
+              ]
+            ].map(([question, answer]) => (
+              <details key={question}>
+                <summary>
+                  {question}
+                  <span>+</span>
+                </summary>
+
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
+        </Reveal>
+
+        <section id="contact" className="contact section">
+          <div>
+            <div className="section-kicker light">
+              ФИНАЛЬНЫЙ ШАГ
+            </div>
+
+            <h2>
+              Начните с системы.
+              <br />
+              <span>Решение останется за вами.</span>
+            </h2>
+          </div>
+
+          <div className="contact-actions">
+            <a
+              className="light-button"
+              href="tel:+79956441700"
+            >
+              Получить доступ
+              <ArrowRight size={19} />
+            </a>
+
+            <a
+              className="contact-link"
+              href="tel:+79956441700"
+            >
+              Обсудить продажу квартиры →
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div className="brand">
+          <span>ПРОДАЙ САМ</span>
+          <small>СИСТЕМА ПРОДАЖИ КВАРТИРЫ</small>
+        </div>
+
+        <span>© 2026 Данил Аверин</span>
+      </footer>
+    </div>
+  );
+}
+
+createRoot(document.getElementById("root")).render(<App />);

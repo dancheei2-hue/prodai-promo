@@ -42,16 +42,8 @@ const modules = [
     description:
       "Подготовьте квартиру к продаже и уберите проблемы ещё до появления первого покупателя.",
     lessons: [
-      [
-        "01.1",
-        "Квартира и документы",
-        "Что проверить и подготовить до выхода на рынок."
-      ],
-      [
-        "01.2",
-        "Подготовка квартиры",
-        "Что действительно влияет на первое впечатление и цену."
-      ]
+      ["01.1", "Квартира и документы", "Что проверить и подготовить до выхода на рынок."],
+      ["01.2", "Подготовка квартиры", "Что действительно влияет на первое впечатление и цену."]
     ]
   },
   {
@@ -61,16 +53,8 @@ const modules = [
     description:
       "Определите реальную цену и стратегию, с которой квартира выйдет на рынок.",
     lessons: [
-      [
-        "02.1",
-        "Анализ рынка",
-        "Как находить сопоставимые квартиры и читать рынок."
-      ],
-      [
-        "02.2",
-        "Цена и стратегия",
-        "Как определить стартовую цену и допустимый торг."
-      ]
+      ["02.1", "Анализ рынка", "Как находить сопоставимые квартиры и читать рынок."],
+      ["02.2", "Цена и стратегия", "Как определить стартовую цену и допустимый торг."]
     ]
   },
   {
@@ -80,16 +64,8 @@ const modules = [
     description:
       "Сделайте подачу квартиры такой, чтобы покупателю захотелось открыть объявление и приехать на просмотр.",
     lessons: [
-      [
-        "03.1",
-        "Фото и видео",
-        "Как показать квартиру самостоятельно и не потерять ценность."
-      ],
-      [
-        "03.2",
-        "Продающее объявление",
-        "Как собрать заголовок, описание и структуру объявления."
-      ]
+      ["03.1", "Фото и видео", "Как показать квартиру самостоятельно и не потерять ценность."],
+      ["03.2", "Продающее объявление", "Как собрать заголовок, описание и структуру объявления."]
     ]
   },
   {
@@ -99,16 +75,8 @@ const modules = [
     description:
       "Дайте объявлению охват и научитесь превращать просмотры в реальные обращения.",
     lessons: [
-      [
-        "04.1",
-        "Площадки и размещение",
-        "Где размещать объект и как контролировать результат."
-      ],
-      [
-        "04.2",
-        "Обращения и покупатели",
-        "Как отвечать, квалифицировать и не терять интерес."
-      ]
+      ["04.1", "Площадки и размещение", "Где размещать объект и как контролировать результат."],
+      ["04.2", "Обращения и покупатели", "Как отвечать, квалифицировать и не терять интерес."]
     ]
   },
   {
@@ -118,16 +86,8 @@ const modules = [
     description:
       "Проведите покупателя от первого просмотра до конкретного предложения.",
     lessons: [
-      [
-        "05.1",
-        "Показы",
-        "Как подготовить встречу и показать ценность квартиры."
-      ],
-      [
-        "05.2",
-        "Переговоры и торг",
-        "Как работать с возражениями, условиями и ценой."
-      ]
+      ["05.1", "Показы", "Как подготовить встречу и показать ценность квартиры."],
+      ["05.2", "Переговоры и торг", "Как работать с возражениями, условиями и ценой."]
     ]
   },
   {
@@ -137,16 +97,8 @@ const modules = [
     description:
       "Согласуйте условия, подготовьте сделку и спокойно доведите продажу до передачи квартиры.",
     lessons: [
-      [
-        "06.1",
-        "Документы и сделка",
-        "Что проверить и согласовать перед подписанием."
-      ],
-      [
-        "06.2",
-        "Расчёты и передача",
-        "Как пройти расчёты, регистрацию и передачу квартиры."
-      ]
+      ["06.1", "Документы и сделка", "Что проверить и согласовать перед подписанием."],
+      ["06.2", "Расчёты и передача", "Как пройти расчёты, регистрацию и передачу квартиры."]
     ]
   }
 ];
@@ -156,7 +108,6 @@ function Reveal({ children, className = "", id }) {
 
   useEffect(() => {
     const element = ref.current;
-
     if (!element) return;
 
     const observer = new IntersectionObserver(
@@ -170,7 +121,6 @@ function Reveal({ children, className = "", id }) {
     );
 
     observer.observe(element);
-
     return () => observer.disconnect();
   }, []);
 
@@ -187,6 +137,7 @@ function App() {
 
   return (
     <div className="site">
+
       <header className="nav">
         <a className="brand" href="#top">
           <span>ПРОДАЙ САМ</span>
@@ -217,31 +168,13 @@ function App() {
 
       {menu && (
         <div className="mobile-panel">
-          <a href="#program" onClick={() => setMenu(false)}>
-            Программа
-          </a>
+          <a href="#program" onClick={() => setMenu(false)}>Программа</a>
+          <a href="#inside" onClick={() => setMenu(false)}>Как проходит</a>
+          <a href="#author" onClick={() => setMenu(false)}>Об авторе</a>
+          <a href="#services" onClick={() => setMenu(false)}>Помощь</a>
+          <a href="#faq" onClick={() => setMenu(false)}>FAQ</a>
 
-          <a href="#inside" onClick={() => setMenu(false)}>
-            Как проходит
-          </a>
-
-          <a href="#author" onClick={() => setMenu(false)}>
-            Об авторе
-          </a>
-
-          <a href="#services" onClick={() => setMenu(false)}>
-            Помощь
-          </a>
-
-          <a href="#faq" onClick={() => setMenu(false)}>
-            FAQ
-          </a>
-
-          <a
-            className="primary"
-            href="#buy"
-            onClick={() => setMenu(false)}
-          >
+          <a className="primary" href="#buy" onClick={() => setMenu(false)}>
             Получить доступ
             <ArrowRight />
           </a>
@@ -249,8 +182,10 @@ function App() {
       )}
 
       <main id="top">
+
         <section className="hero">
           <div className="hero-copy">
+
             <div className="eyebrow">
               СИСТЕМА ПРОДАЖИ КВАРТИРЫ · 6 МОДУЛЕЙ
             </div>
@@ -286,33 +221,22 @@ function App() {
             </div>
 
             <div className="hero-proof">
-              <span>
-                <strong>6</strong>
-                модулей
-              </span>
-
-              <span>
-                <strong>12</strong>
-                уроков
-              </span>
-
-              <span>
-                <strong>1</strong>
-                понятный маршрут
-              </span>
+              <span><strong>6</strong>модулей</span>
+              <span><strong>12</strong>уроков</span>
+              <span><strong>1</strong>понятный маршрут</span>
             </div>
+
           </div>
 
           <div className="hero-visual">
+
             <div className="hero-photo">
-              <img
-                src={siteImages.hero}
-                alt="Современный интерьер квартиры"
-              />
+              <img src={siteImages.hero} alt="Современный интерьер квартиры" />
               <span>КВАРТИРА · ПЕРВЫЙ ВЗГЛЯД</span>
             </div>
 
             <div className="sale-map">
+
               <div className="sale-map-head">
                 <span>МАРШРУТ ПРОДАЖИ</span>
                 <b>01 → 06</b>
@@ -328,6 +252,7 @@ function App() {
                   ["06", "Сделка", "Деньги и ключи"]
                 ].map((step, index) => (
                   <React.Fragment key={step[0]}>
+
                     <div
                       className={`path-step ${
                         index === 0 ? "active" : ""
@@ -339,6 +264,7 @@ function App() {
                     </div>
 
                     {index < 5 && <div className="path-line" />}
+
                   </React.Fragment>
                 ))}
               </div>
@@ -349,14 +275,18 @@ function App() {
                 <span>ПОКУПАТЕЛИ</span>
                 <span>СДЕЛКА</span>
               </div>
+
             </div>
           </div>
         </section>
 
+
         <Reveal className="intro section">
+
           <div className="section-kicker">ПОЧЕМУ ЭТО ВАЖНО</div>
 
           <div className="intro-grid">
+
             <div>
               <h2>
                 Продать квартиру —
@@ -379,12 +309,12 @@ function App() {
             </div>
 
             <div className="intro-visual">
+
               <div className="intro-photo">
                 <img
                   src={siteImages.intro}
                   alt="Современный интерьер квартиры"
                 />
-
                 <span>
                   Подача квартиры начинается с первого впечатления.
                 </span>
@@ -407,12 +337,16 @@ function App() {
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </Reveal>
 
+
         <section id="program" className="program section dark-section">
+
           <div className="program-head">
+
             <div>
               <div className="section-kicker light">ПРОГРАММА</div>
 
@@ -427,26 +361,26 @@ function App() {
               Не длинный список из 20 пунктов, а шесть понятных этапов.
               Внутри каждого — два практических урока.
             </p>
+
           </div>
 
           <div className="modules-grid">
+
             {modules.map((module, index) => {
               const isOpen = openModule === index;
 
               return (
                 <div
-                  className={`module-card ${
-                    isOpen ? "is-open" : ""
-                  }`}
+                  className={`module-card ${isOpen ? "is-open" : ""}`}
                   key={module.num}
                 >
+
                   <div className="module-thumb">
                     <img
                       src={moduleImages[module.num]}
                       alt={module.subtitle}
                       loading="lazy"
                     />
-
                     <span>{module.num} / 06</span>
                   </div>
 
@@ -478,32 +412,40 @@ function App() {
 
                   <div className="module-content">
                     <div>
+
                       <p className="module-description">
                         {module.description}
                       </p>
 
                       <div className="lesson-list">
-                        {module.lessons.map(([number, title, description]) => (
-                          <div
-                            className="lesson-row"
-                            key={number}
-                          >
-                            <span>{number}</span>
 
-                            <span>
-                              <strong>{title}</strong>
-                              <small>{description}</small>
-                            </span>
+                        {module.lessons.map(
+                          ([number, title, description]) => (
+                            <div
+                              className="lesson-row"
+                              key={number}
+                            >
+                              <span>{number}</span>
 
-                            <ArrowRight size={16} />
-                          </div>
-                        ))}
+                              <span>
+                                <strong>{title}</strong>
+                                <small>{description}</small>
+                              </span>
+
+                              <ArrowRight size={16} />
+                            </div>
+                          )
+                        )}
+
                       </div>
+
                     </div>
                   </div>
+
                 </div>
               );
             })}
+
           </div>
 
           <div className="program-footer-note">
@@ -515,10 +457,14 @@ function App() {
             <i>•</i>
             <span>ПРАКТИЧЕСКИЕ ЗАДАНИЯ</span>
           </div>
+
         </section>
 
+
         <Reveal id="inside" className="inside section">
+
           <div className="inside-copy">
+
             <div className="section-kicker">
               КАК ЭТО ВЫГЛЯДИТ
             </div>
@@ -555,9 +501,11 @@ function App() {
               Получить доступ
               <ArrowRight size={17} />
             </a>
+
           </div>
 
           <div className="course-preview">
+
             <div className="browser-bar">
               <span />
               <span />
@@ -566,6 +514,7 @@ function App() {
             </div>
 
             <div className="course-ui">
+
               <aside>
                 {modules.map((module) => (
                   <div
@@ -581,6 +530,7 @@ function App() {
               </aside>
 
               <div className="lesson">
+
                 <div className="lesson-media">
                   <img
                     src={siteImages.lesson}
@@ -611,14 +561,19 @@ function App() {
                     </span>
                   ))}
                 </div>
+
               </div>
             </div>
           </div>
+
         </Reveal>
 
+
         <Reveal id="author" className="author section">
+
           <div className="author-image">
             <div className="author-photo-wrap">
+
               <img
                 className="author-photo"
                 src="/prodai-promo/danil.webp"
@@ -628,11 +583,15 @@ function App() {
                 }}
               />
 
-              <div className="portrait-placeholder">ДА</div>
+              <div className="portrait-placeholder">
+                ДА
+              </div>
+
             </div>
           </div>
 
           <div className="author-copy">
+
             <div className="section-kicker">
               КАК ЭТО СОЗДАНО
             </div>
@@ -655,11 +614,16 @@ function App() {
               «Сложные вещи можно делать проще, если разложить их
               на правильные действия.»
             </div>
+
           </div>
+
         </Reveal>
 
+
         <section id="buy" className="buy section">
+
           <div className="buy-main">
+
             <div className="buy-photo">
               <img
                 src={siteImages.deal}
@@ -676,172 +640,292 @@ function App() {
             </div>
 
             <div className="buy-main-copy">
+
               <div className="section-kicker light">
-                ПОЛНЫЙ ДОСТУП
+                ХОТИТЕ СДЕЛАТЬ САМИ?
               </div>
 
               <h2>Продай сам</h2>
 
-              <div className="price">2 990 ₽</div>
+              <div className="price">
+                5 990 ₽
+              </div>
 
               <p>
-                6 модулей, 12 уроков, материалы и практические
-                задания.
+                Получите понятную систему и разберитесь во всём
+                самостоятельно — от подготовки квартиры до сделки.
               </p>
 
+              <div className="buy-meta">
+                6 модулей · 12 уроков · чек-листы · шаблоны
+              </div>
+
               <a className="light-button" href="#contact">
-                Получить доступ
+                Получить систему
                 <ArrowRight size={19} />
               </a>
+
             </div>
           </div>
 
           <div className="buy-side">
+
             <div className="section-kicker">
-              НУЖНА ПОМОЩЬ?
+              ИЛИ ДЕЛЕГИРУЙТЕ ЧАСТЬ РАБОТЫ
             </div>
 
             <h3>
-              Не хотите заниматься продажей самостоятельно?
+              Не хотите разбираться во всём самостоятельно?
             </h3>
 
             <p>
-              Можно заказать отдельную помощь на нужном этапе
-              или полностью делегировать продажу.
+              Выберите только ту помощь, которая действительно нужна.
+              Покупать курс и услуги вместе не нужно.
             </p>
 
             <a className="outline-button" href="#services">
               Посмотреть варианты помощи
             </a>
+
           </div>
+
         </section>
 
+
         <Reveal id="services" className="services section">
-          <div className="services-head">
+
+          <div className="services-intro">
+
             <div>
               <div className="section-kicker">
-                ПОМОЩЬ НА ЛЮБОМ ЭТАПЕ
+                ВЫБИРАЙТЕ ОДИН ФОРМАТ
               </div>
 
               <h2>
-                Не хотите делать
+                Сами или
                 <br />
-                <span>всё самостоятельно?</span>
+                <span>с моей помощью.</span>
               </h2>
             </div>
 
             <p>
-              Можно взять только тот этап, на котором нужна помощь.
-              А если поймёте, что хотите делегировать продажу
-              целиком — обсудим сопровождение под ключ.
+              Здесь нет обязательной последовательности.
+              Выбирайте вариант в зависимости от того,
+              сколько работы хотите сделать самостоятельно.
             </p>
+
           </div>
 
-          <div className="services-grid">
-            <article className="service-card">
-              <span className="service-number">01</span>
 
-              <h3>Понять цену</h3>
+          <div className="services-choice">
 
-              <div className="service-price">
-                5 900 ₽
+            <div className="choice-label">
+              <span>ХОЧУ РАЗОБРАТЬСЯ САМ</span>
+              <i>01</i>
+            </div>
+
+            <div className="course-choice">
+
+              <div className="course-choice-main">
+                <div className="choice-kicker">
+                  САМОСТОЯТЕЛЬНО
+                </div>
+
+                <h3>
+                  Продай квартиру
+                  <br />
+                  самостоятельно
+                </h3>
+
+                <p>
+                  Получите систему и пройдите весь путь продажи
+                  самостоятельно. Курс подходит тем, кто хочет
+                  понимать каждый этап и принимать решения самому.
+                </p>
               </div>
 
-              <p>
-                Анализ рынка, сравнение с аналогами, диапазон
-                цены и стратегия торга.
-              </p>
+              <div className="course-choice-side">
+                <strong>5 990 ₽</strong>
 
-              <a href="#contact" className="service-link">
-                Заказать
-                <ArrowRight size={16} />
-              </a>
-            </article>
+                <span>
+                  6 модулей · 12 уроков
+                  <br />
+                  чек-листы · шаблоны
+                </span>
 
-            <article className="service-card">
-              <span className="service-number">02</span>
-
-              <h3>Подготовить к продаже</h3>
-
-              <div className="service-price">
-                14 900 ₽
+                <a className="choice-button" href="#contact">
+                  Получить систему
+                  <ArrowRight size={17} />
+                </a>
               </div>
 
-              <p>
-                Подготовка квартиры, рекомендации по фото,
-                тексту объявления и стратегии размещения.
-              </p>
+            </div>
 
-              <a href="#contact" className="service-link">
-                Заказать
-                <ArrowRight size={16} />
-              </a>
-            </article>
-
-            <article className="service-card service-card-featured">
-              <span className="service-number">03</span>
-
-              <div className="service-badge">
-                САМОСТОЯТЕЛЬНО, НО С ПОДДЕРЖКОЙ
-              </div>
-
-              <h3>Продать самому</h3>
-
-              <div className="service-price">
-                29 900 ₽
-              </div>
-
-              <p>
-                Система, консультации по ходу продажи,
-                продвижение, показы, переговоры и торг.
-              </p>
-
-              <a href="#contact" className="service-link">
-                Обсудить формат
-                <ArrowRight size={16} />
-              </a>
-            </article>
-
-            <article className="service-card service-card-dark">
-              <span className="service-number">04</span>
-
-              <div className="service-badge">
-                ПОЛНОЕ СОПРОВОЖДЕНИЕ
-              </div>
-
-              <h3>Продажа под ключ</h3>
-
-              <div className="service-price">
-                105 000 ₽
-              </div>
-
-              <p>
-                Берём процесс на себя: от подготовки квартиры
-                и поиска покупателей до переговоров и сделки.
-              </p>
-
-              <a href="#contact" className="service-link">
-                Обсудить продажу
-                <ArrowRight size={16} />
-              </a>
-            </article>
           </div>
+
+
+          <div className="services-divider">
+            <span>ИЛИ</span>
+          </div>
+
+
+          <div className="services-choice">
+
+            <div className="choice-label">
+              <span>ХОЧУ ДЕЛЕГИРОВАТЬ ЧАСТЬ ИЛИ ВСЮ РАБОТУ</span>
+              <i>02</i>
+            </div>
+
+            <div className="services-grid">
+
+              <article className="service-card">
+
+                <span className="service-number">
+                  01
+                </span>
+
+                <h3>
+                  Разбор квартиры
+                  <br />
+                  и стратегии
+                </h3>
+
+                <div className="service-price">
+                  5 900 ₽
+                </div>
+
+                <p>
+                  Анализ вашей квартиры и рынка: цена,
+                  позиционирование, стратегия выхода на рынок
+                  и торга.
+                </p>
+
+                <a href="#contact" className="service-link">
+                  Заказать
+                  <ArrowRight size={16} />
+                </a>
+
+              </article>
+
+
+              <article className="service-card">
+
+                <span className="service-number">
+                  02
+                </span>
+
+                <h3>
+                  Подготовка
+                  <br />
+                  к продаже
+                </h3>
+
+                <div className="service-price">
+                  14 900 ₽
+                </div>
+
+                <p>
+                  Я приеду на объект, помогу подготовить квартиру,
+                  сам сделаю фотографии и составлю текст объявления.
+                </p>
+
+                <a href="#contact" className="service-link">
+                  Заказать
+                  <ArrowRight size={16} />
+                </a>
+
+              </article>
+
+
+              <article className="service-card service-card-featured">
+
+                <span className="service-number">
+                  03
+                </span>
+
+                <div className="service-badge">
+                  ПОКУПАТЕЛЯ НАХОДИТЕ ВЫ
+                </div>
+
+                <h3>
+                  Сопровождение
+                  <br />
+                  сделки
+                </h3>
+
+                <div className="service-price">
+                  63 000 ₽
+                </div>
+
+                <p>
+                  Покупателя находите вы. Я занимаюсь подготовкой
+                  сделки, юридической проверкой документов и
+                  участников, расчётами и регистрацией.
+                </p>
+
+                <a href="#contact" className="service-link">
+                  Обсудить
+                  <ArrowRight size={16} />
+                </a>
+
+              </article>
+
+
+              <article className="service-card service-card-dark">
+
+                <span className="service-number">
+                  04
+                </span>
+
+                <div className="service-badge">
+                  ПОЛНОЕ СОПРОВОЖДЕНИЕ
+                </div>
+
+                <h3>
+                  Продажа
+                  <br />
+                  под ключ
+                </h3>
+
+                <div className="service-price">
+                  105 000 ₽
+                </div>
+
+                <p>
+                  Я беру на себя весь процесс: подготовку,
+                  продвижение, поиск покупателя, показы,
+                  переговоры и сделку.
+                </p>
+
+                <a href="#contact" className="service-link">
+                  Обсудить продажу
+                  <ArrowRight size={16} />
+                </a>
+
+              </article>
+
+            </div>
+          </div>
+
 
           <div className="services-note">
             <strong>
-              Если после консультации решите доверить нам продажу
-              под ключ, стоимость консультации можно зачесть
-              в сопровождение.
+              Не нужно покупать курс и услуги вместе.
+              Выберите только тот формат, который подходит
+              именно вам.
             </strong>
 
             <span>
-              Условия и состав работ уточняются после оценки
-              вашей ситуации.
+              Хотите сделать всё самостоятельно — берите систему.
+              Нужна моя работа — выбирайте подходящую услугу.
             </span>
           </div>
+
         </Reveal>
 
+
         <Reveal id="faq" className="faq section">
+
           <div>
             <div className="section-kicker">FAQ</div>
 
@@ -855,6 +939,7 @@ function App() {
           </div>
 
           <div className="faq-list">
+
             {[
               [
                 "Подойдёт ли система, если я никогда не продавал квартиру?",
@@ -865,12 +950,16 @@ function App() {
                 "Доступ к 6 модулям и 12 урокам, видео, инструкциям, чек-листам, материалам и практическим заданиям."
               ],
               [
-                "Можно ли обратиться к вам за помощью?",
-                "Да. Можно выбрать отдельную услугу или обсудить сопровождение продажи квартиры."
+                "Обязательно ли покупать курс перед услугой?",
+                "Нет. Курс и услуги — самостоятельные варианты. Вы выбираете тот формат, который вам подходит."
+              ],
+              [
+                "Можно ли заказать только часть работы?",
+                "Да. Можно выбрать отдельный разбор, подготовку квартиры или сопровождение сделки."
               ],
               [
                 "Это юридическая консультация?",
-                "Нет. Система объясняет процесс и действия собственника. Конкретные юридические вопросы зависят от обстоятельств сделки и требуют отдельной проверки."
+                "Нет. Курс объясняет процесс продажи квартиры. При сопровождении конкретной сделки проводится отдельная юридическая проверка документов и участников сделки."
               ]
             ].map(([question, answer]) => (
               <details key={question}>
@@ -882,28 +971,35 @@ function App() {
                 <p>{answer}</p>
               </details>
             ))}
+
           </div>
+
         </Reveal>
 
+
         <section id="contact" className="contact section">
+
           <div>
+
             <div className="section-kicker light">
               ФИНАЛЬНЫЙ ШАГ
             </div>
 
             <h2>
-              Начните с системы.
+              Выберите свой
               <br />
-              <span>Решение останется за вами.</span>
+              <span>формат продажи.</span>
             </h2>
+
           </div>
 
           <div className="contact-actions">
+
             <a
               className="light-button"
               href="tel:+79956441700"
             >
-              Получить доступ
+              Обсудить вариант
               <ArrowRight size={19} />
             </a>
 
@@ -913,18 +1009,25 @@ function App() {
             >
               Обсудить продажу квартиры →
             </a>
+
           </div>
+
         </section>
+
       </main>
 
+
       <footer>
+
         <div className="brand">
           <span>ПРОДАЙ САМ</span>
           <small>СИСТЕМА ПРОДАЖИ КВАРТИРЫ</small>
         </div>
 
         <span>© 2026 Данил Аверин</span>
+
       </footer>
+
     </div>
   );
 }

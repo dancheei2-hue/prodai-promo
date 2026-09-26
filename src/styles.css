@@ -1072,14 +1072,25 @@ h2 span{
 
 .author-image{
   min-height:520px;
+  position:relative;
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  border-radius:18px;
-  background:
-    radial-gradient(circle at 50% 30%,#2563eb21,transparent 38%),
-    linear-gradient(145deg,#e6e9ed,#f3f4f6);
-  overflow:hidden;
+  background:transparent;
+  overflow:visible;
+}
+
+.author-image::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:8%;
+  width:82%;
+  aspect-ratio:1;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(circle, #2563eb16 0%, #2563eb08 42%, transparent 70%);
+  z-index:0;
 }
 
 .author-photo-wrap{
@@ -1090,6 +1101,7 @@ h2 span{
   display:flex;
   align-items:flex-end;
   justify-content:center;
+  z-index:1;
 }
 
 .author-photo{
@@ -2610,4 +2622,15 @@ footer>span{
   .selfcheck-question{padding:18px 0}
   .selfcheck-question>strong{font-size:12px}
   .selfcheck-question button{font-size:9px;min-height:36px;padding:0 11px}
+}
+
+
+/* BUY BLOCK — prevent CTA collision on narrow screens */
+.buy-main-copy{max-width:470px}
+@media(max-width:520px){
+  .buy-main{min-height:570px;padding-bottom:150px}
+  .buy-main-copy{max-width:100%}
+  .buy-main p{max-width:330px}
+  .buy-main .light-button{position:relative;z-index:3;margin-top:25px}
+  .buy-photo>div{bottom:20px;max-width:280px}
 }

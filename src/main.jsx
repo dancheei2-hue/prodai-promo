@@ -134,6 +134,42 @@ function Reveal({ children, className = "", id }) {
 function App() {
   const [menu, setMenu] = useState(false);
   const [openModule, setOpenModule] = useState(null);
+  const [selfCheck, setSelfCheck] = useState([null, null, null, null, null]);
+
+  const selfCheckQuestions = [
+    {
+      q: "Сколько времени вы готовы уделять продаже?",
+      options: [["few", "Почти нет времени"], ["some", "Есть несколько часов в неделю"], ["much", "Готов заниматься регулярно"]]
+    },
+    {
+      q: "Готовы сами определить цену и следить за рынком?",
+      options: [["yes", "Да"], ["help", "Хочу помощь"], ["no", "Нет"]]
+    },
+    {
+      q: "Готовы принимать звонки, проводить показы и вести переговоры?",
+      options: [["yes", "Да"], ["part", "Часть дел готов делать"], ["no", "Нет"]]
+    },
+    {
+      q: "Готовы самостоятельно заниматься документами и сделкой?",
+      options: [["yes", "Да"], ["help", "Хочу помощь"], ["no", "Нет"]]
+    },
+    {
+      q: "Насколько срочно нужно продать квартиру?",
+      options: [["slow", "Срок не критичен"], ["normal", "Есть обычный срок"], ["fast", "Нужно максимально быстро"]]
+    }
+  ];
+
+  const selfCheckResult = selfCheck.filter(Boolean).length < 5
+    ? null
+    : (() => {
+        const counts = selfCheck.reduce((acc, value) => {
+          acc[value] = (acc[value] || 0) + 1;
+          return acc;
+        }, {});
+        if ((counts.no || 0) >= 2 || (counts.few || 0) >= 2) return "delegate";
+        if ((counts.help || 0) >= 2 || (counts.part || 0) >= 2 || (counts.some || 0) >= 2) return "mixed";
+        return "self";
+      })();
 
   return (
     <div className="site">
@@ -187,7 +223,7 @@ function App() {
           <div className="hero-copy">
 
             <div className="eyebrow">
-              СИСТЕМА ПРОДАЖИ КВАРТИРЫ · 6 МОДУЛЕЙ
+              ДЛЯ СОБСТВЕННИКА, КОТОРЫЙ ХОЧЕТ ПРОДАТЬ САМ
             </div>
 
             <h1>
@@ -205,25 +241,26 @@ function App() {
             </div>
 
             <p className="hero-lead">
-              Пошаговая система для собственника: от подготовки квартиры
-              и определения цены до переговоров, сделки и получения денег.
+              Не хотите отдавать продажу риелтору? Не нужно. Здесь вся работа
+              разложена по шагам: от подготовки квартиры и определения цены
+              до переговоров, сделки и передачи ключей.
             </p>
 
             <div className="hero-actions">
               <a className="primary hero-button" href="#buy">
-                Посмотреть систему
+                Посмотреть, что предстоит сделать
                 <ArrowRight size={19} />
               </a>
 
               <a className="hero-secondary" href="#program">
-                6 модулей · 12 уроков
+                6 этапов · 65+ действий
               </a>
             </div>
 
             <div className="hero-proof">
-              <span><strong>6</strong>модулей</span>
-              <span><strong>12</strong>уроков</span>
-              <span><strong>1</strong>понятный маршрут</span>
+              <span><strong>6</strong>этапов</span>
+              <span><strong>65+</strong>действий</span>
+              <span><strong>20–44</strong>часа*</span>
             </div>
 
           </div>
@@ -343,6 +380,125 @@ function App() {
         </Reveal>
 
 
+        <Reveal className="honest section">
+          <div className="section-kicker">ЧЕСТНЫЙ ПОДХОД</div>
+
+          <div className="honest-grid">
+            <div>
+              <h2>Вы можете сделать<br /><span>всё сами.</span></h2>
+              <p>
+                Я не буду убеждать вас, что без риелтора квартиру продать невозможно.
+                Возможно. Но сначала стоит увидеть весь процесс целиком и понять,
+                сколько работы вы готовы взять на себя.
+              </p>
+            </div>
+
+            <div className="honest-cards">
+              <article>
+                <b>01</b>
+                <strong>Разобраться</strong>
+                <span>Понять, что делать на каждом этапе и в какой последовательности.</span>
+              </article>
+              <article>
+                <b>02</b>
+                <strong>Сделать самостоятельно</strong>
+                <span>Получить инструкции, чек-листы и пройти путь самому.</span>
+              </article>
+              <article>
+                <b>03</b>
+                <strong>Делегировать нужное</strong>
+                <span>Если какой-то этап неудобен или сложен, подключить помощь.</span>
+              </article>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal className="workload section">
+          <div className="section-kicker">СКОЛЬКО ЭТО ЗАЙМЁТ</div>
+
+          <div className="workload-grid">
+            <div>
+              <h2>Самостоятельная продажа —<br /><span>это реальная работа.</span></h2>
+              <p>
+                Ориентиры показывают активную работу собственника.
+                Время ожидания покупателей не включено.
+              </p>
+            </div>
+
+            <div className="workload-stats">
+              <div><strong>20–44</strong><span>часа активной работы*</span></div>
+              <div><strong>65+</strong><span>конкретных действий</span></div>
+              <div><strong>∞</strong><span>обращения, показы и переговоры</span></div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal className="selfcheck section">
+          <div className="section-kicker">БЫСТРАЯ САМОДИАГНОСТИКА</div>
+
+          <div className="selfcheck-head">
+            <div>
+              <h2>Стоит ли вам<br /><span>продавать самому?</span></h2>
+              <p>Пять вопросов. Примерно одна минута. Ответ покажет, какой объём работы вам ближе.</p>
+            </div>
+            <div className="selfcheck-progress">{selfCheck.filter(Boolean).length} / 5</div>
+          </div>
+
+          <div className="selfcheck-list">
+            {selfCheckQuestions.map((item, qi) => (
+              <div className="selfcheck-question" key={item.q}>
+                <strong>{qi + 1}. {item.q}</strong>
+                <div>
+                  {item.options.map(([value, label]) => (
+                    <button
+                      type="button"
+                      key={value}
+                      className={selfCheck[qi] === value ? "selected" : ""}
+                      onClick={() => setSelfCheck(prev => {
+                        const next = [...prev];
+                        next[qi] = value;
+                        return next;
+                      })}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {selfCheckResult && (
+            <div className="selfcheck-result">
+              {selfCheckResult === "self" && (
+                <>
+                  <b>Похоже, вам подходит самостоятельный путь.</b>
+                  <span>У вас есть время и готовность брать основные этапы на себя. Система поможет пройти их последовательно.</span>
+                </>
+              )}
+              {selfCheckResult === "mixed" && (
+                <>
+                  <b>Похоже, вам подойдёт смешанный формат.</b>
+                  <span>Основную часть можно сделать самостоятельно, а сложные или неудобные этапы — делегировать.</span>
+                </>
+              )}
+              {selfCheckResult === "delegate" && (
+                <>
+                  <b>Похоже, часть работы вам удобнее передать.</b>
+                  <span>Самостоятельная продажа возможна, но часть этапов вы не готовы брать на себя. Можно выбрать только нужную помощь.</span>
+                </>
+              )}
+              <a className="text-link" href="#services">
+                Посмотреть варианты <ArrowRight size={17} />
+              </a>
+            </div>
+          )}
+
+          <small className="workload-note">
+            * Ориентир для активной работы по основным этапам. Реальный объём зависит от объекта и ситуации на рынке.
+          </small>
+        </Reveal>
+
         <section id="program" className="program section dark-section">
 
           <div className="program-head">
@@ -358,8 +514,8 @@ function App() {
             </div>
 
             <p>
-              Не длинный список из 20 пунктов, а шесть понятных этапов.
-              Внутри каждого — два практических урока.
+              Шесть понятных этапов. Внутри каждого — два урока, чек-листы
+              и конкретный результат, который должен появиться по вашей квартире.
             </p>
 
           </div>
@@ -449,13 +605,13 @@ function App() {
           </div>
 
           <div className="program-footer-note">
-            <span>6 МОДУЛЕЙ</span>
+            <span>6 ЭТАПОВ</span>
             <i>•</i>
             <span>12 УРОКОВ</span>
             <i>•</i>
-            <span>ЧЕК-ЛИСТЫ</span>
+            <span>65+ ДЕЙСТВИЙ</span>
             <i>•</i>
-            <span>ПРАКТИЧЕСКИЕ ЗАДАНИЯ</span>
+            <span>ЧЕК-ЛИСТЫ</span>
           </div>
 
         </section>
@@ -642,7 +798,7 @@ function App() {
             <div className="buy-main-copy">
 
               <div className="section-kicker light">
-                ХОТИТЕ СДЕЛАТЬ САМИ?
+                ВЕСЬ ПУТЬ — В ОДНОЙ СИСТЕМЕ
               </div>
 
               <h2>Продай сам</h2>
@@ -652,12 +808,13 @@ function App() {
               </div>
 
               <p>
-                Получите понятную систему и разберитесь во всём
-                самостоятельно — от подготовки квартиры до сделки.
+                Получите систему и пройдите весь путь самостоятельно.
+                Не нужно собирать информацию по кусочкам —
+                последовательность уже собрана за вас.
               </p>
 
               <div className="buy-meta">
-                6 модулей · 12 уроков · чек-листы · шаблоны
+                6 этапов · 12 уроков · 65+ действий · чек-листы · шаблоны
               </div>
 
               <a className="light-button" href="#contact">
@@ -671,16 +828,17 @@ function App() {
           <div className="buy-side">
 
             <div className="section-kicker">
-              ИЛИ ДЕЛЕГИРУЙТЕ ЧАСТЬ РАБОТЫ
+              ЕСЛИ НЕ ХОТИТЕ ДЕЛАТЬ ВСЁ САМИ
             </div>
 
             <h3>
-              Не хотите разбираться во всём самостоятельно?
+              Не хотите делать всё самостоятельно?
             </h3>
 
             <p>
-              Выберите только ту помощь, которая действительно нужна.
-              Покупать курс и услуги вместе не нужно.
+              Сделать всё самому — нормально. Делегировать часть или всю работу —
+              тоже. Если в процессе поймёте, что какой-то этап проще передать,
+              помощь можно подключить отдельно.
             </p>
 
             <a className="outline-button" href="#services">
@@ -698,20 +856,20 @@ function App() {
 
             <div>
               <div className="section-kicker">
-                ВЫБИРАЙТЕ ОДИН ФОРМАТ
+                СДЕЛАТЬ САМОМУ ИЛИ ДЕЛЕГИРОВАТЬ
               </div>
 
               <h2>
-                Сами или
+                Самостоятельно
                 <br />
-                <span>с моей помощью.</span>
+                <span>или с моей помощью.</span>
               </h2>
             </div>
 
             <p>
-              Здесь нет обязательной последовательности.
-              Выбирайте вариант в зависимости от того,
-              сколько работы хотите сделать самостоятельно.
+              Здесь нет обязательной последовательности. Сначала можно пройти
+              систему самостоятельно, а затем подключить помощь только там,
+              где она действительно нужна. Или сразу передать весь процесс.
             </p>
 
           </div>
@@ -910,14 +1068,14 @@ function App() {
 
           <div className="services-note">
             <strong>
-              Не нужно покупать курс и услуги вместе.
-              Выберите только тот формат, который подходит
-              именно вам.
+              Не нужно покупать курс и услуги вместе. Сначала можете разобраться
+              самостоятельно. Если передумаете — помощь можно подключить
+              на нужном этапе.
             </strong>
 
             <span>
               Хотите сделать всё самостоятельно — берите систему.
-              Нужна моя работа — выбирайте подходящую услугу.
+              Нужна помощь — выбирайте только нужную услугу.
             </span>
           </div>
 
@@ -958,6 +1116,10 @@ function App() {
                 "Да. Можно выбрать отдельный разбор, подготовку квартиры или сопровождение сделки."
               ],
               [
+                "Сколько времени занимает самостоятельная продажа?",
+                "Ориентир — около 20–44 часов активной работы по основным этапам. Это не включает ожидание покупателей и регулярную работу с обращениями, показами и переговорами."
+              ],
+              [
                 "Это юридическая консультация?",
                 "Нет. Курс объясняет процесс продажи квартиры. При сопровождении конкретной сделки проводится отдельная юридическая проверка документов и участников сделки."
               ]
@@ -986,9 +1148,9 @@ function App() {
             </div>
 
             <h2>
-              Выберите свой
+              Выберите, как
               <br />
-              <span>формат продажи.</span>
+              <span>продавать квартиру.</span>
             </h2>
 
           </div>
@@ -999,7 +1161,7 @@ function App() {
               className="light-button"
               href="tel:+79956441700"
             >
-              Обсудить вариант
+              Получить систему
               <ArrowRight size={19} />
             </a>
 

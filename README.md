@@ -1,38 +1,10 @@
-# Продай сам
+# Обновление prodai-promo
 
-Одностраничный сайт продукта «Продай сам» на React + Vite.
+Этот архив применяет подготовленные изменения к текущему проекту.
 
-## Запуск на компьютере
+1. Распакуйте архив в корень prodai-promo.
+2. Запустите: `node apply-update.js`
+3. Проверьте: `npm run build`
+4. Загрузите изменённые `src/main.jsx` и `src/styles.css` в GitHub.
 
-Требуется Node.js 20+.
-
-```bash
-npm install
-npm run dev
-```
-
-После запуска Vite покажет локальный адрес, обычно:
-
-`http://localhost:5173/`
-
-## Публикация на GitHub Pages
-
-1. Создайте новый репозиторий на GitHub, например `proday-sam`.
-2. Загрузите в репозиторий все файлы этого проекта.
-3. Убедитесь, что основная ветка называется `main`.
-4. Откройте **Settings → Pages**.
-5. В **Build and deployment → Source** выберите **GitHub Actions**.
-6. Сделайте push в `main` или запустите workflow вручную во вкладке **Actions**.
-7. После успешного деплоя сайт будет доступен примерно по адресу:
-
-`https://ВАШ-ЛОГИН.github.io/proday-sam/`
-
-Workflow уже находится в `.github/workflows/deploy.yml` и автоматически собирает `dist` и публикует его в GitHub Pages.
-
-## Структура
-
-- `src/main.jsx` — React-разметка и логика страницы
-- `src/styles.css` — стили и адаптив
-- `index.html` — точка входа
-- `vite.config.js` — конфигурация Vite
-- `.github/workflows/deploy.yml` — автоматический деплой на GitHub Pages
+Скрипт создаёт резервные копии `.backup`.

@@ -413,26 +413,6 @@ function App() {
           </div>
         </Reveal>
 
-        <Reveal className="workload section">
-          <div className="section-kicker">СКОЛЬКО ЭТО ЗАЙМЁТ</div>
-
-          <div className="workload-grid">
-            <div>
-              <h2>Самостоятельная продажа —<br /><span>это реальная работа.</span></h2>
-              <p>
-                Ориентиры показывают активную работу собственника.
-                Время ожидания покупателей не включено.
-              </p>
-            </div>
-
-            <div className="workload-stats">
-              <div><strong>20–44</strong><span>часа активной работы*</span></div>
-              <div><strong>65+</strong><span>конкретных действий</span></div>
-              <div><strong>∞</strong><span>обращения, показы и переговоры</span></div>
-            </div>
-          </div>
-        </Reveal>
-
         <Reveal className="selfcheck section">
           <div className="section-kicker">БЫСТРАЯ САМОДИАГНОСТИКА</div>
 
@@ -494,9 +474,6 @@ function App() {
             </div>
           )}
 
-          <small className="workload-note">
-            * Ориентир для активной работы по основным этапам. Реальный объём зависит от объекта и ситуации на рынке.
-          </small>
         </Reveal>
 
         <section id="program" className="program section dark-section">
@@ -818,7 +795,7 @@ function App() {
               </div>
 
               <a className="light-button" href="#contact">
-                Получить систему
+                Обсудить курс
                 <ArrowRight size={19} />
               </a>
 
@@ -1108,7 +1085,7 @@ function App() {
               className="light-button"
               href="tel:+79956441700"
             >
-              Получить систему
+              Обсудить курс
               <ArrowRight size={19} />
             </a>
 

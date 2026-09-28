@@ -131,10 +131,130 @@ function Reveal({ children, className = "", id }) {
   );
 }
 
+
+function LearnPage() {
+  const [checks, setChecks] = useState([false, false, false, false, false, false]);
+  const done = checks.filter(Boolean).length;
+
+  const checklist = [
+    "Определил собственника и основание права собственности",
+    "Нашёл документ, подтверждающий право собственности",
+    "Проверил, кто ещё может иметь права на квартиру",
+    "Отдельно отметил ипотеку, обременения или ограничения",
+    "Проверил необходимость согласий и дополнительных документов",
+    "Собрал всё в одну папку для дальнейшей работы"
+  ];
+
+  return (
+    <div className="learning-page">
+      <header className="learning-header">
+        <a className="learning-brand" href="#top">ПРОДАЙ САМ <span>ОБУЧЕНИЕ</span></a>
+        <a className="learning-back" href="#program">← Вернуться к программе</a>
+      </header>
+
+      <div className="learning-shell">
+        <aside className="learning-nav">
+          <div className="learning-nav-top">
+            <span>ПРОГРЕСС</span>
+            <strong>01 / 12</strong>
+          </div>
+          <div className="learning-progress-bar"><span style={{ width: `${(1 / 12) * 100}%` }} /></div>
+
+          {modules.map((module) => (
+            <div className="learning-module" key={module.num}>
+              <div className="learning-module-title"><span>{module.num}</span>{module.title}</div>
+              {module.lessons.map(([number, title]) => (
+                <a
+                  key={number}
+                  href={number === "01.1" ? "#learn/01-1" : "#program"}
+                  className={`learning-lesson ${number === "01.1" ? "active" : "locked"}`}
+                >
+                  <span>{number}</span>
+                  <b>{title}</b>
+                  {number !== "01.1" && <small>Далее</small>}
+                </a>
+              ))}
+            </div>
+          ))}
+        </aside>
+
+        <main className="learning-content">
+          <div className="learning-breadcrumb">МОДУЛЬ 01 · ПОДГОТОВЬТЕ · УРОК 01.1</div>
+          <div className="learning-title-row">
+            <div>
+              <h1>Квартира и документы</h1>
+              <p>Разберёмся, что должно быть готово до выхода квартиры на рынок.</p>
+            </div>
+            <span className="learning-duration">5–6 минут</span>
+          </div>
+
+          <section className="learning-video-card">
+            <div className="learning-video-placeholder">
+              <img src={siteImages.lesson} alt="Урок 01.1" />
+              <button className="learning-play" aria-label="Запустить урок"><Play size={28} weight="fill" /></button>
+              <span>ВИДЕОУРОК</span>
+            </div>
+            <div className="learning-video-copy">
+              <span>УРОК 01.1</span>
+              <h2>Что должно быть готово до объявления</h2>
+              <p>Проверим право собственности, документы и обстоятельства, которые могут повлиять на сроки, цену или саму возможность продажи.</p>
+            </div>
+          </section>
+
+          <section className="learning-grid">
+            <div className="learning-card">
+              <span className="section-kicker">ПОСЛЕ УРОКА</span>
+              <h2>У вас будет понятная картина ситуации.</h2>
+              <ul className="learning-outcomes">
+                <li><Check size={18} /> Понимаете, какие документы нужны именно вам.</li>
+                <li><Check size={18} /> Видите потенциальные ограничения заранее.</li>
+                <li><Check size={18} /> Знаете, что нужно уточнить до публикации.</li>
+              </ul>
+            </div>
+
+            <div className="learning-card learning-check-card">
+              <div className="learning-card-head">
+                <div><span className="section-kicker">ЧЕК-ЛИСТ</span><h2>Проверьте свою квартиру</h2></div>
+                <strong>{done}/6</strong>
+              </div>
+              <div className="learning-checklist">
+                {checklist.map((item, index) => (
+                  <button key={item} className={checks[index] ? "is-done" : ""} onClick={() => setChecks((prev) => prev.map((value, i) => i === index ? !value : value))}>
+                    <span>{checks[index] ? <Check size={15} /> : index + 1}</span>{item}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="learning-task">
+            <div><span className="section-kicker">ПРАКТИКА</span><h2>Соберите папку «Продажа квартиры»</h2></div>
+            <p>Создайте на компьютере или телефоне отдельную папку. Сложите туда документы, которые уже есть, а рядом запишите всё, что нужно запросить или уточнить.</p>
+            <div className="learning-task-note"><b>Результат:</b> к следующему уроку у вас есть одна папка и список незакрытых вопросов по квартире.</div>
+          </section>
+
+          <div className="learning-next">
+            <div><span>СЛЕДУЮЩИЙ УРОК</span><strong>01.2 · Подготовка квартиры</strong></div>
+            <a href="#program">Перейти к уроку <ArrowRight size={18} /></a>
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
+
 function App() {
+  const [route, setRoute] = useState(window.location.hash);
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
   const [menu, setMenu] = useState(false);
   const [openModule, setOpenModule] = useState(null);
   const [selfCheck, setSelfCheck] = useState([null, null, null, null, null]);
+  const [lessonChecks, setLessonChecks] = useState([false, false, false, false, false, false]);
+  if (route.startsWith("#learn/")) return <LearnPage />;
 
   const selfCheckQuestions = [
     {
@@ -554,9 +674,10 @@ function App() {
 
                         {module.lessons.map(
                           ([number, title, description]) => (
-                            <div
+                            <a
                               className="lesson-row"
                               key={number}
+                              href={number === "01.1" ? "#learn/01-1" : "#learn/" + number.replace(".", "-")}
                             >
                               <span>{number}</span>
 
@@ -566,7 +687,7 @@ function App() {
                               </span>
 
                               <ArrowRight size={16} />
-                            </div>
+                            </a>
                           )
                         )}
 
@@ -592,114 +713,6 @@ function App() {
           </div>
 
         </section>
-
-
-        <Reveal id="inside" className="inside section">
-
-          <div className="inside-copy">
-
-            <div className="section-kicker">
-              КАК ЭТО ВЫГЛЯДИТ
-            </div>
-
-            <h2>
-              Понятный формат.
-              <br />
-              <span>Реальные действия.</span>
-              <br />
-              Измеримый результат.
-            </h2>
-
-            <p>
-              Вы не просто смотрите уроки. После каждого этапа у вас
-              появляется конкретный результат по вашей квартире.
-            </p>
-
-            <ul>
-              {[
-                "Короткое видео с объяснением",
-                "Пошаговая инструкция",
-                "Чек-лист действий",
-                "Шаблоны и рабочие материалы",
-                "Практическое задание"
-              ].map((item) => (
-                <li key={item}>
-                  <Check size={18} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <a className="text-link" href="#buy">
-              Получить доступ
-              <ArrowRight size={17} />
-            </a>
-
-          </div>
-
-          <div className="course-preview">
-
-            <div className="browser-bar">
-              <span />
-              <span />
-              <span />
-              <b>Продай сам / Модуль 02</b>
-            </div>
-
-            <div className="course-ui">
-
-              <aside>
-                {modules.map((module) => (
-                  <div
-                    className={
-                      module.num === "02" ? "active" : ""
-                    }
-                    key={module.num}
-                  >
-                    <b>{module.num}</b>
-                    {module.subtitle}
-                  </div>
-                ))}
-              </aside>
-
-              <div className="lesson">
-
-                <div className="lesson-media">
-                  <img
-                    src={siteImages.lesson}
-                    alt="Урок о продаже квартиры"
-                  />
-
-                  <div className="lesson-play">
-                    <Play size={24} weight="fill" />
-                  </div>
-
-                  <span>12:34</span>
-                </div>
-
-                <h4>Определяем реальную цену</h4>
-
-                <div className="check-panel">
-                  <b>Что нужно сделать</b>
-
-                  {[
-                    "Найти аналоги",
-                    "Сравнить характеристики",
-                    "Определить диапазон",
-                    "Установить стартовую цену"
-                  ].map((item) => (
-                    <span key={item}>
-                      <Check size={14} />
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </Reveal>
 
 
         <Reveal id="author" className="author section">
